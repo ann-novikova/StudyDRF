@@ -5,7 +5,8 @@ from study.models import Course, Lesson
 
 
 class LessonSerializer(ModelSerializer):
-    """"Сериализатор для урока"""
+    """ "Сериализатор для урока"""
+
     class Meta:
         model = Lesson
         fields = "__all__"
@@ -21,6 +22,7 @@ class CourseSerializer(ModelSerializer):
     общее количество уроков в курсе.
     """
 
+    lessons = LessonSerializer(many=True, read_only=True)
     lessons_count = SerializerMethodField(read_only=True)
 
     def get_lessons_count(self, obj):
@@ -29,7 +31,4 @@ class CourseSerializer(ModelSerializer):
 
     class Meta:
         model = Course
-        fields = "__all__"
-
-
-
+        fields = ["name", "description", "preview", "lessons_count", "lessons"]
