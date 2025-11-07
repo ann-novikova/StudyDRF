@@ -4,20 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5bfa229-68e9-4f87-9a6f-57d4d28b4c1c" name="Changes" comment="Docstrings, count lesson in serializer added">
-      <change afterPath="$PROJECT_DIR$/users/management/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/management/commands/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/management/commands/pay_data.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/serializers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/study/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/study/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/study/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/study/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
+    <list default="true" id="f5bfa229-68e9-4f87-9a6f-57d4d28b4c1c" name="Changes" comment="All tasks done, linters">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,13 +116,22 @@
       <option name="project" value="LOCAL" />
       <updated>1762355215841</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="All tasks done, linters">
+      <option name="closed" value="true" />
+      <created>1762508268642</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1762508268642</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commmit" />
     <MESSAGE value="Created models and views" />
     <MESSAGE value="Docstrings, count lesson in serializer added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Docstrings, count lesson in serializer added" />
+    <MESSAGE value="All tasks done, linters" />
+    <option name="LAST_COMMIT_MESSAGE" value="All tasks done, linters" />
   </component>
 </project>
