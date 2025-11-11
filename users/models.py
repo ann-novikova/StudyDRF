@@ -24,8 +24,7 @@ class User(AbstractUser):
         help_text="Введите номер телефона",
     )
     city = models.CharField(
-        max_length=100, verbose_name="Город", help_text="Введите город проживания"
-    )
+        max_length=100, verbose_name="Город", help_text="Введите город проживания", blank=True, null=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
@@ -36,7 +35,7 @@ class User(AbstractUser):
 
     def __str__(self):
         """Возвращает строковое представление объекта User"""
-        return self.user.email
+        return self.email or f"User #{self.pk}"
 
 
 class Payment(models.Model):
