@@ -42,10 +42,10 @@ class Lesson(models.Model):
     )
     course = models.ForeignKey(
         Course,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         max_length=150,
         verbose_name="Курсы",
-        related_name="courses",
+        related_name="lessons",
         blank=True,
         null=True,
     )
