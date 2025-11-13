@@ -1,12 +1,15 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter, SearchFilter
-from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
+from rest_framework.generics import (CreateAPIView, DestroyAPIView,
+                                     ListAPIView, RetrieveAPIView,
+                                     UpdateAPIView)
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
 from users.models import Payment, User
 from users.permissions import IsOwner, UserIsOwner
-from users.serializers import PaymentSerializer, UserSerializer, PublicUserSerializer
+from users.serializers import (PaymentSerializer, PublicUserSerializer,
+                               UserSerializer)
 
 
 class PaymentViewSet(ReadOnlyModelViewSet):
@@ -27,7 +30,7 @@ class UserListApiView(ListAPIView):
     """Контроллер для вывода пользователей с историей платежей"""
 
     queryset = User.objects.all()
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated,)
     serializer_class = PublicUserSerializer
 
 
@@ -50,7 +53,10 @@ class UserUpdateApiView(UpdateAPIView):
     """Контроллер для редактирования данных пользователя"""
 
     queryset = User.objects.all()
-    permission_classes = (UserIsOwner, IsAuthenticated,)
+    permission_classes = (
+        UserIsOwner,
+        IsAuthenticated,
+    )
     serializer_class = UserSerializer
 
 
@@ -58,7 +64,10 @@ class UserDestroyApiView(DestroyAPIView):
     """Контроллер для удаления данных пользователя"""
 
     queryset = User.objects.all()
-    permission_classes = (UserIsOwner, IsAuthenticated,)
+    permission_classes = (
+        UserIsOwner,
+        IsAuthenticated,
+    )
     serializer_class = UserSerializer
 
 
@@ -74,4 +83,3 @@ class UserCreateApiView(CreateAPIView):
         user = serializer.save(is_active=True)
         user.set_password(user.password)
         user.save()
-
