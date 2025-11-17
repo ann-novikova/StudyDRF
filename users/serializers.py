@@ -23,6 +23,7 @@ class UserSerializer(ModelSerializer):
         read_only_fields = ["id", "email"]
 
     def update(self, instance, validated_data):
+        """Метод для обновления пароля пользователя"""
         password = validated_data.pop("password", None)
         if password:
             instance.set_password(password)
