@@ -1,5 +1,7 @@
 from django.db import models
 
+from config import settings
+
 
 class Course(models.Model):
     """Класс для курса"""
@@ -14,6 +16,13 @@ class Course(models.Model):
     )
     description = models.TextField(
         max_length=300, verbose_name="Описание курса", blank=True, null=True
+    )
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        verbose_name="Владелец",
     )
 
     def __str__(self):
@@ -50,6 +59,13 @@ class Lesson(models.Model):
         null=True,
     )
     url = models.URLField(verbose_name="Ссылка на видео", blank=True, null=True)
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        verbose_name="Владелец",
+    )
 
     def __str__(self):
         """Метод для строкового отображения"""

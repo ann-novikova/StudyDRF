@@ -19,4 +19,20 @@ class UserSerializer(ModelSerializer):
 
     class Meta:
         model = User
-        fields = ["email", "phone", "city", "payments"]
+        fields = ["id", "email", "first_name", "last_name", "phone", "city", "payments"]
+        read_only_fields = ["id", "email"]
+
+    def update(self, instance, validated_data):
+        password = validated_data.pop("password", None)
+        if password:
+            instance.set_password(password)
+
+        return super().update(instance, validated_data)
+
+
+class PublicUserSerializer(ModelSerializer):
+    """ "Сериализатор для пользователя при публичном просмотре"""
+
+    class Meta:
+        model = User
+        fields = ["id", "email", "first_name", "avatar", "city"]
