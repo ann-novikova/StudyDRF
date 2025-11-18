@@ -1,9 +1,15 @@
 from rest_framework.serializers import ValidationError
 
-valid_url = "youtube.com"
 
+class UrlValidator:
 
-def validate_url(value):
-    """Валидация ссылки на ресурс для урока"""
-    if valid_url not in value:
-        raise ValidationError("Допускаются только ссылки на youtube.com")
+    def __init__(self, field):
+        self.field = field
+
+    def __call__(self, value):
+        valid_url = "youtube.com"
+        tmp_val = dict(value).get(self.field)
+        if valid_url not in tmp_val:
+            raise ValidationError(
+                {self.field: "Допускаются только ссылки на youtube.com"}
+            )

@@ -39,6 +39,7 @@ class LessonTestCase(APITestCase):
         data = {"name": "Pytest", "url": "http://myaccount.com/lesson1/"}
         response = self.client.post(url, data)
         data = response.json()
+        print(data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(data.get("url"), ["Допускаются только ссылки на youtube.com"])
 

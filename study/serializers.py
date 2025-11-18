@@ -1,14 +1,14 @@
 from rest_framework import serializers
 
 from study.models import Course, Lesson
-from study.validators import validate_url
+from study.validators import UrlValidator
 from users.models import Subscription
 
 
 class LessonSerializer(serializers.ModelSerializer):
     """ "Сериализатор для урока"""
 
-    url = serializers.CharField(validators=[validate_url])
+    validators = [UrlValidator(field="url")]
 
     class Meta:
         model = Lesson
