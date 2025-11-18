@@ -5,7 +5,8 @@ from rest_framework_simplejwt.views import (TokenObtainPairView,
                                             TokenRefreshView)
 
 from users.apps import UsersConfig
-from users.views import (PaymentViewSet, UserCreateApiView, UserDestroyApiView,
+from users.views import (PaymentViewSet, SubscriptionAPIView,
+                         UserCreateApiView, UserDestroyApiView,
                          UserListApiView, UserRetriveApiView,
                          UserUpdateApiView)
 
@@ -13,7 +14,6 @@ app_name = UsersConfig.name
 
 router = SimpleRouter()
 router.register("payments", PaymentViewSet)
-
 
 urlpatterns = [
     path("users/", UserListApiView.as_view(), name="users"),
@@ -30,6 +30,11 @@ urlpatterns = [
         "token/refresh/",
         TokenRefreshView.as_view(permission_classes=(AllowAny,)),
         name="token_refresh",
+    ),
+    path(
+        "subscriptions/activate/",
+        SubscriptionAPIView.as_view(),
+        name="subscription_activate",
     ),
 ]
 
