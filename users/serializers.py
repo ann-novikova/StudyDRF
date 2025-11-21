@@ -1,18 +1,20 @@
+from rest_framework import serializers
 from rest_framework.relations import StringRelatedField
-from rest_framework.serializers import ModelSerializer
 
 from users.models import Payment, User
 
 
-class PaymentSerializer(ModelSerializer):
+class PaymentSerializer(serializers.ModelSerializer):
     """ "Сериализатор для платежей"""
+
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Payment
         fields = "__all__"
 
 
-class UserSerializer(ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     """ "Сериализатор для пользователя"""
 
     payments = StringRelatedField(many=True, read_only=True)
@@ -31,7 +33,7 @@ class UserSerializer(ModelSerializer):
         return super().update(instance, validated_data)
 
 
-class PublicUserSerializer(ModelSerializer):
+class PublicUserSerializer(serializers.ModelSerializer):
     """ "Сериализатор для пользователя при публичном просмотре"""
 
     class Meta:

@@ -97,6 +97,13 @@ class Payment(models.Model):
     date_pay = models.DateTimeField(auto_now=True, verbose_name="Дата оплаты")
 
     payment_amount = models.PositiveIntegerField(default=0, verbose_name="Сумма оплаты")
+    session_id = models.CharField(
+        max_length=400, blank=True, null=True, verbose_name="ID сессии"
+    )
+    link = models.URLField(
+        max_length=500, blank=True, null=True, verbose_name="Ссылка для оплаты"
+    )
+    payment_status = models.CharField(default="unpaid", verbose_name="Статус платежа")
 
     type_pay = models.CharField(
         max_length=20,
