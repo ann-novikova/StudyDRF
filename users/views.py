@@ -34,6 +34,7 @@ class PaymentListAPIView(ListAPIView):
 
 
 class PaymentCreateAPIView(CreateAPIView):
+    """Контроллер для создания оплаты через Stripe"""
 
     serializer_class = PaymentSerializer
     queryset = Payment.objects.all()
@@ -47,7 +48,7 @@ class PaymentCreateAPIView(CreateAPIView):
 
 
 class PaymentRetrievePIView(RetrieveAPIView):
-    """Контроллер для вывода списка платежей с фильтрацией и сортировкой по дате"""
+    """Контроллер для вывода информации по платежу"""
 
     serializer_class = PaymentSerializer
     queryset = Payment.objects.all()
