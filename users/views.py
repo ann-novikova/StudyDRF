@@ -8,16 +8,17 @@ from rest_framework.generics import (CreateAPIView, DestroyAPIView,
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.viewsets import ReadOnlyModelViewSet
 
 from study.models import Course
 from users.models import Payment, Subscription, User
 from users.permissions import UserIsOwner
 from users.serializers import (PaymentSerializer, PublicUserSerializer,
                                UserSerializer)
+from users.services import (change_get_status, create_session,
+                            create_stripe_price, create_stripe_product)
 
 
-class PaymentViewSet(ReadOnlyModelViewSet):
+class PaymentListAPIView(ListAPIView):
     """Контроллер для вывода списка платежей с фильтрацией и сортировкой по дате"""
 
     queryset = Payment.objects.all()
@@ -29,6 +30,34 @@ class PaymentViewSet(ReadOnlyModelViewSet):
     )
     search_fields = ["paid_course__name", "paid_lesson__name", "type_pay"]
     ordering_fields = ["date_pay"]
+
+
+class PaymentCreateAPIView(CreateAPIView):
+    """Контроллер для создания оплаты через Stripe"""
+
+    serializer_class = PaymentSerializer
+    queryset = Payment.objects.all()
+
+    def perform_create(self, serializer):
+        payment_details = serializer.save(user=self.request.user)
+        product = create_stripe_product(payment_details.paid_course)
+        price = create_stripe_price(payment_details.payment_amount, product)
+        payment_details.session_id, payment_details.link = create_session(price)
+        payment_details.save()
+
+
+class PaymentRetrievePIView(RetrieveAPIView):
+    """Контроллер для вывода информации по платежу"""
+
+    serializer_class = PaymentSerializer
+    queryset = Payment.objects.all()
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.payment_status = change_get_status(instance.session_id)
+        instance.save(update_fields=["payment_status"])
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
 
 
 class UserListApiView(ListAPIView):
