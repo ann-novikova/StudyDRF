@@ -24,6 +24,8 @@ class Course(models.Model):
         null=True,
         verbose_name="Владелец",
     )
+    updated_at = models.DateTimeField(auto_now=True)
+    last_notified_at = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         """Метод для строкового отображения"""
