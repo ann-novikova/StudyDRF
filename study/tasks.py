@@ -27,13 +27,7 @@ def send_course_update_email(course_id):
     message = "Посмотрите последние обновления курса!"
     print("emails")
     if emails:
-        send_mail(
-            subject,
-            message,
-            DEFAULT_FROM_EMAIL,
-            emails
-        )
+        send_mail(subject, message, DEFAULT_FROM_EMAIL, emails)
         print(f"Sent update email for course {course_id} to {len(emails)} users.")
         return len(emails)
     return 0
-

@@ -139,11 +139,11 @@ CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
 
 CELERY_BEAT_SCHEDULE = {
-    'block-inactive-users-daily': {
-        'task': 'study.tasks.block_inactive_users',
-        'schedule': crontab(hour=3, minute=0),
-        'args': (),
-        'options': {'expires': 15 * 60},
+    "block-inactive-users-daily": {
+        "task": "study.tasks.block_inactive_users",
+        "schedule": crontab(hour=3, minute=0),
+        "args": (),
+        "options": {"expires": 15 * 60},
     },
 }
 

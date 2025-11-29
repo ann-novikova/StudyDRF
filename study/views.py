@@ -1,14 +1,18 @@
-from rest_framework.generics import (CreateAPIView, DestroyAPIView,
-                                     ListAPIView, RetrieveAPIView,
-                                     UpdateAPIView)
+from rest_framework.generics import (
+    CreateAPIView,
+    DestroyAPIView,
+    ListAPIView,
+    RetrieveAPIView,
+    UpdateAPIView,
+)
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
 from study.models import Course, Lesson
 from study.paginations import CustomPagination
 from study.serializers import CourseSerializer, LessonSerializer
-from users.permissions import IsModer, IsOwner
 from study.tasks import send_course_update_email
+from users.permissions import IsModer, IsOwner
 
 
 class CourseViewSet(ModelViewSet):
@@ -37,9 +41,7 @@ class CourseViewSet(ModelViewSet):
         THROTTLE_SECONDS = 4 * 60 * 60
         task_id = f"course_update_notification_{course.pk}"
         send_course_update_email.apply_async(
-            args=[course.pk],
-            task_id=task_id,
-            countdown=THROTTLE_SECONDS
+            args=[course.pk], task_id=task_id, countdown=THROTTLE_SECONDS
         )
 
 

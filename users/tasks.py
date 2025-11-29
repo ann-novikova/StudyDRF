@@ -1,6 +1,7 @@
+from datetime import timedelta
+
 from celery import shared_task
 from django.utils import timezone
-from datetime import timedelta
 
 from users.models import User
 
@@ -13,14 +14,11 @@ def block_inactive_users():
 
     threshold = timezone.now() - timedelta(days=30)
 
-    inactive_users_count = User.objects.filter(
-        is_active=True
-    ).filter(
-        last_login__lt=threshold
-    ).exclude(
-        is_superuser=True
-    ).update(
-        is_active=False
+    inactive_users_count = (
+        User.objects.filter(is_active=True)
+        .filter(last_login__lt=threshold)
+        .exclude(is_superuser=True)
+        .update(is_active=False)
     )
 
     total_blocked = inactive_users_count
