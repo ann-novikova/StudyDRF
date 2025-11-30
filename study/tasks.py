@@ -1,9 +1,14 @@
+import logging
+
 from celery import shared_task
 from django.core.mail import send_mail
+from django.utils import timezone
 
 from config.settings import DEFAULT_FROM_EMAIL
 from study.models import Course
 from users.models import Subscription
+
+logger = logging.getLogger(__name__)
 
 
 @shared_task()
@@ -25,9 +30,14 @@ def send_course_update_email(course_id):
 
     subject = f"Обновление курса: {course.name}"
     message = "Посмотрите последние обновления курса!"
-    print("emails")
     if emails:
         send_mail(subject, message, DEFAULT_FROM_EMAIL, emails)
-        print(f"Sent update email for course {course_id} to {len(emails)} users.")
+        course.last_notified_at = timezone.now()
+        course.save(update_fields=["last_notified_at"])
+        logger.info(
+            "send_course_update_email: Sent update email for course id=%s to %d users.",
+            course_id,
+            len(emails),
+        )
         return len(emails)
     return 0
