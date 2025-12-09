@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.relations import StringRelatedField
 
-from users.models import Payment, User
+from users.models import Payment, Subscription, User
 
 
 class PaymentSerializer(serializers.ModelSerializer):
@@ -14,6 +14,16 @@ class PaymentSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class SubscriptionSerializer(serializers.ModelSerializer):
+    """ "Сериализатор для подписки"""
+
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
+
+    class Meta:
+        model = Subscription
+        fields = "__all__"
+
+
 class UserSerializer(serializers.ModelSerializer):
     """ "Сериализатор для пользователя"""
 
@@ -22,7 +32,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["id", "email", "first_name", "last_name", "phone", "city", "payments"]
-        read_only_fields = ["id", "email"]
+        read_only_fields = ["id"]
 
     def update(self, instance, validated_data):
         """Метод для обновления пароля пользователя"""
@@ -36,6 +46,8 @@ class UserSerializer(serializers.ModelSerializer):
 class PublicUserSerializer(serializers.ModelSerializer):
     """ "Сериализатор для пользователя при публичном просмотре"""
 
+    subscriptions = SubscriptionSerializer(many=True, read_only=True)
+
     class Meta:
         model = User
-        fields = ["id", "email", "first_name", "avatar", "city"]
+        fields = ["id", "email", "first_name", "avatar", "city", "subscriptions"]

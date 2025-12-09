@@ -2,9 +2,13 @@ from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status
 from rest_framework.filters import OrderingFilter, SearchFilter
-from rest_framework.generics import (CreateAPIView, DestroyAPIView,
-                                     ListAPIView, RetrieveAPIView,
-                                     UpdateAPIView)
+from rest_framework.generics import (
+    CreateAPIView,
+    DestroyAPIView,
+    ListAPIView,
+    RetrieveAPIView,
+    UpdateAPIView,
+)
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -12,10 +16,13 @@ from rest_framework.views import APIView
 from study.models import Course
 from users.models import Payment, Subscription, User
 from users.permissions import UserIsOwner
-from users.serializers import (PaymentSerializer, PublicUserSerializer,
-                               UserSerializer)
-from users.services import (change_get_status, create_session,
-                            create_stripe_price, create_stripe_product)
+from users.serializers import PaymentSerializer, PublicUserSerializer, UserSerializer
+from users.services import (
+    change_get_status,
+    create_session,
+    create_stripe_price,
+    create_stripe_product,
+)
 
 
 class PaymentListAPIView(ListAPIView):

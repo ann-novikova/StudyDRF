@@ -129,7 +129,10 @@ class Subscription(models.Model):
     """Класс для подписки на обновления курсов"""
 
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, verbose_name="Пользователь"
+        User,
+        on_delete=models.CASCADE,
+        verbose_name="Пользователь",
+        related_name="subscriptions",
     )
 
     course = models.ForeignKey(
