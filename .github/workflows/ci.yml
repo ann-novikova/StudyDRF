@@ -31,9 +31,20 @@ jobs:
     - name: Run migrations
       env:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        DATABASE_NAME: study
+        DATABASE_USER: postgres
+        DATABASE_PASSWORD: 12345
+        DATABASE_HOST: localhost
+        DATABASE_PORT: 5432
       run: python manage.py migrate
-
     - name: Run tests
+      env:
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        DATABASE_NAME: study
+        DATABASE_USER: postgres
+        DATABASE_PASSWORD: 12345
+        DATABASE_HOST: localhost
+        DATABASE_PORT: 5432
       run: python manage.py test
 
   build:
