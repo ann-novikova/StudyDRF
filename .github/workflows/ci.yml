@@ -34,7 +34,7 @@ jobs:
         DATABASE_NAME: study
         DATABASE_USER: postgres
         DATABASE_PASSWORD: 12345
-        DATABASE_HOST: localhost
+        DATABASE_HOST: postgres
         DATABASE_PORT: 5432
       run: python manage.py migrate
     - name: Run tests
@@ -43,7 +43,7 @@ jobs:
         DATABASE_NAME: study
         DATABASE_USER: postgres
         DATABASE_PASSWORD: 12345
-        DATABASE_HOST: localhost
+        DATABASE_HOST: postgres
         DATABASE_PORT: 5432
       run: python manage.py test
 
