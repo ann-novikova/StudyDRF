@@ -6,16 +6,15 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    # Добавляем сервисы для PostgreSQL
     services:
       postgres:
-        image: postgres:13 # Выберите нужную версию PostgreSQL
+        image: postgres:16
         env:
-          POSTGRES_DB: ${{ env.DATABASE_NAME }} # Используем переменную окружения из job'а
+          POSTGRES_DB: ${{ env.DATABASE_NAME }}
           POSTGRES_USER: ${{ env.DATABASE_USER }}
           POSTGRES_PASSWORD: ${{ env.DATABASE_PASSWORD }}
         ports:
-          - 5432:5432 # Прокидываем порт PostgreSQL на хост
+          - 5432:5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
