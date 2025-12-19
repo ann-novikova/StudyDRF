@@ -37,8 +37,8 @@ jobs:
       DATABASE_PASSWORD: 12345
       DATABASE_HOST: localhost
       DATABASE_PORT: 5432
-      CELERY_BROKER_URL: redis://redis:6379/0
-      CELERY_RESULT_BACKEND: redis://redis:6379/0
+      CELERY_BROKER_URL: redis://redis:6379/1
+      CELERY_RESULT_BACKEND: redis://redis:6379/1
 
     steps:
       - name: Check out code
@@ -65,21 +65,6 @@ jobs:
       - name: Run migrations
         run: python manage.py migrate
 
-      - name: Wait for Redis to be ready
-        run: |
-            echo "Waiting for Redis to be ready..."
-            for i in $(seq 1 15); do # Попробуем до 15 раз с задержкой 5 секунд = 75 секунд
-              if redis-cli -h redis -p 6379 ping; then
-                echo "Redis is ready!"
-                break
-              fi
-              echo "Waiting for Redis... ($i/15)"
-              sleep 5
-            done
-            if ! redis-cli -h redis -p 6379 ping; then
-              echo "Redis did not start or is unreachable!"
-              exit 1
-            fi
       - name: Run tests
         run: python manage.py test
 
