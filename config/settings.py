@@ -184,7 +184,7 @@ LOGGING = {
     },
 }
 
-if "test" in sys.argv:
+if os.environ.get("DJANGO_ENV") == "test" or "test" in sys.argv:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
@@ -198,3 +198,11 @@ if "test" in sys.argv:
             "BACKEND": "django.core.cache.backends.dummy.DummyCache",
         }
     }
+
+    CELERY_TASK_ALWAYS_EAGER = True
+    CELERY_TASK_EAGER_PROPAGATES_EXCEPTIONS = True
+
+    CELERY_BROKER_URL = 'memory://'
+    CELERY_RESULT_BACKEND = 'cache+django://'
+
+    EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
