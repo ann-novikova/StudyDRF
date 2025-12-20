@@ -85,7 +85,7 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }}
         env:
-          SSH_PASSPHRASE: ${{ secrets.MY_SSH_PASSPHRASE }}
+          SSH_PASSPHRASE: ${{ secrets.SSH_PASSPHRASE }}
 
       - name: Deploy to Server
         run: |
