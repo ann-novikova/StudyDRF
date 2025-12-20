@@ -203,6 +203,6 @@ if os.environ.get("DJANGO_ENV") == "test" or "test" in sys.argv:
     CELERY_TASK_EAGER_PROPAGATES_EXCEPTIONS = True
 
     CELERY_BROKER_URL = 'memory://'
-    CELERY_RESULT_BACKEND = 'cache+django://'
+    CELERY_RESULT_BACKEND = 'cache+memory://'
 
     EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
