@@ -84,7 +84,8 @@ jobs:
         uses: webfactory/ssh-agent@v0.9.1
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }}
-          ssh-passphrase: ${{ secrets.SSH_PASSPHRASE }}
+        env:
+          SSH_PASSPHRASE: ${{ secrets.MY_SSH_PASSPHRASE }}
 
       - name: Deploy to Server
         run: |
