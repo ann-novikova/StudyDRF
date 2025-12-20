@@ -5,40 +5,38 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
-#
-#    services:
-#      postgres:
-#        image: postgres:16
-#        env:
-#          POSTGRES_DB: ${{ env.DATABASE_NAME }}
-#          POSTGRES_USER: ${{ env.DATABASE_USER }}
-#          POSTGRES_PASSWORD: ${{ env.DATABASE_PASSWORD }}
-#        ports:
-#          - 5432:5432
-#        options: >-
-#          --health-cmd pg_isready
-#          --health-interval 10s
-#          --health-timeout 5s
-#          --health-retries 5
-#
-#      redis:
-#        image: redis:latest
-#        ports:
-#          - 6379:6379
-#        options: >-
-#          --health-cmd "redis-cli ping"
-#          --health-interval 10s
-#          --health-timeout 5s
-#          --health-retries 5
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: ${{ env.DATABASE_NAME }}
+          POSTGRES_USER: ${{ env.DATABASE_USER }}
+          POSTGRES_PASSWORD: ${{ env.DATABASE_PASSWORD }}
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis:latest
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     env:
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
-#      DATABASE_NAME: study
-#      DATABASE_USER: postgres
-#      DATABASE_PASSWORD: 12345
-#      DATABASE_HOST: localhost
-#      DATABASE_PORT: 5432
-#      CELERY_BROKER_URL: redis://redis:6379/1
-#      CELERY_RESULT_BACKEND: redis://redis:6379/1
+      DATABASE_NAME: study
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: 12345
+      DATABASE_HOST: localhost
+      DATABASE_PORT: 5432
 
     steps:
       - name: Check out code
